@@ -57,9 +57,14 @@ public class RNZendeskChatModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void startChat(ReadableMap options) {
         setVisitorInfo(options);
+        ZopimChat.SessionConfig config = new ZopimChat.SessionConfig();
+        if (options.hasKey("department")) {
+            config.department(options.getString("department"));
+        }
         Activity activity = getCurrentActivity();
+
         if (activity != null) {
-            activity.startActivity(new Intent(mReactContext, ZopimChatActivity.class));
+            ZopimChatActivity.startActivity(activity, config);
         }
     }
 }
