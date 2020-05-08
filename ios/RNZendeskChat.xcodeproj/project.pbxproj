@@ -6,6 +6,11 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E8950DDF2465F8CA003A0D4D /* RNZendeskChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8950DDD2465F8CA003A0D4D /* RNZendeskChat.swift */; };
+		E8950DE02465F8CA003A0D4D /* RNZendeskChat.m in Sources */ = {isa = PBXBuildFile; fileRef = E8950DDE2465F8CA003A0D4D /* RNZendeskChat.m */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		B6462EBD1C603E340010294B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -19,9 +24,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4B41BB0D230D2ED900D95FAA /* RNZendeskChat */ = {isa = PBXFileReference; lastKnownFileType = folder; path = RNZendeskChat; sourceTree = "<group>"; };
 		5BBE13E12465C84F00259C7E /* RNZendeskChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "RNZendeskChat-Bridging-Header.h"; path = "../../.Trashes/501/RNZendeskChat-Bridging-Header.h"; sourceTree = "<group>"; };
 		B6462EBF1C603E340010294B /* libRNZendeskChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNZendeskChat.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8950DDD2465F8CA003A0D4D /* RNZendeskChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RNZendeskChat.swift; sourceTree = "<group>"; };
+		E8950DDE2465F8CA003A0D4D /* RNZendeskChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNZendeskChat.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,8 +44,8 @@
 		B6462EB61C603E340010294B = {
 			isa = PBXGroup;
 			children = (
+				E8950DDC2465F8CA003A0D4D /* RNZendeskChat */,
 				5BBE13E12465C84F00259C7E /* RNZendeskChat-Bridging-Header.h */,
-				4B41BB0D230D2ED900D95FAA /* RNZendeskChat */,
 				B6462EC01C603E340010294B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +56,15 @@
 				B6462EBF1C603E340010294B /* libRNZendeskChat.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E8950DDC2465F8CA003A0D4D /* RNZendeskChat */ = {
+			isa = PBXGroup;
+			children = (
+				E8950DDD2465F8CA003A0D4D /* RNZendeskChat.swift */,
+				E8950DDE2465F8CA003A0D4D /* RNZendeskChat.m */,
+			);
+			path = RNZendeskChat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,6 +124,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8950DE02465F8CA003A0D4D /* RNZendeskChat.m in Sources */,
+				E8950DDF2465F8CA003A0D4D /* RNZendeskChat.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
