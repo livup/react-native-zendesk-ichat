@@ -8,5 +8,5 @@
 
 @end
 
-@implementation RNZendeskChat: NSObject
-@end
+ @implementation RNZendeskChat: NSObject
+ @end
