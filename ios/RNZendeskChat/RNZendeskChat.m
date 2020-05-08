@@ -1,6 +1,6 @@
 #import <React/RCTBridgeModule.h>
 
-@interface RCT_EXTERN_MODULE(RNZendeskChat, NSObject<RCTBridgeModule>)
+@interface RCT_EXTERN_MODULE(RNZendeskChat, NSObject)
 
   RCT_EXTERN_METHOD(setVisitorInfo: (NSDictionary *)options )
   RCT_EXTERN_METHOD(startChat: (NSDictionary *)options )
@@ -8,5 +8,5 @@
 
 @end
 
-@implementation RNZendeskChat
+@implementation RNZendeskChat: NSObject
 @end
