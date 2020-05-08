@@ -16,12 +16,13 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => "10.3"}
   s.source       = { :git => "https://github.com/github_account/wolox-zendesk-chat.git", :tag => "#{s.version}" }
 
-  s.source_files  = "**/*.{h,m}"
+  s.source_files  = "**/*.{h,m,swift}"
 
   s.requires_arc = true
 
   s.dependency 'React'
   s.dependency 'ZendeskChatSDK'
   s.static_framework = true
+  s.swift_version '5.0'
 end
 
