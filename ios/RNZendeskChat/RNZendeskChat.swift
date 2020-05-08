@@ -13,7 +13,7 @@ import ChatProvidersSDK
 import MessagingSDK
 
 @objc(RNZendeskChat)
-class RNZendeskChat: NSObject<RCTBridgeModule> {
+class RNZendeskChat: NSObject {
     
     @objc func setVisitorInfo(_ options: NSDictionary) -> Void {
         let chatAPIConfiguration = ChatAPIConfiguration();
