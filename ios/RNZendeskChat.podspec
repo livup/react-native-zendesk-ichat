@@ -13,15 +13,15 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
   s.authors      = { "David Tito" => "davidtito1992@gmail.com" }
-  s.platforms    = { :ios => "9.3"}
-  s.source       = { :git => "https://github.com/github_account/wolox-zendesk-chat.git", :tag => "#{s.version}" }
+  s.platforms    = { :ios => "10.3"}
+  s.source       = { :git => "https://github.com/DawTaylor/rn-zendesk-pod-test.git", :tag => "#{s.version}" }
 
   s.source_files  = "**/*.{h,m}"
 
   s.requires_arc = true
 
   s.dependency 'React'
-  s.dependency 'ZDCChat'
+  s.dependency 'ZendeskChatSDK'
   s.static_framework = true
 end
 
