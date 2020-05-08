@@ -20,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		4B41BB0D230D2ED900D95FAA /* RNZendeskChat */ = {isa = PBXFileReference; lastKnownFileType = folder; path = RNZendeskChat; sourceTree = "<group>"; };
+		5BBE13E12465C84F00259C7E /* RNZendeskChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "RNZendeskChat-Bridging-Header.h"; path = "../../.Trashes/501/RNZendeskChat-Bridging-Header.h"; sourceTree = "<group>"; };
 		B6462EBF1C603E340010294B /* libRNZendeskChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNZendeskChat.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -37,6 +38,7 @@
 		B6462EB61C603E340010294B = {
 			isa = PBXGroup;
 			children = (
+				5BBE13E12465C84F00259C7E /* RNZendeskChat-Bridging-Header.h */,
 				4B41BB0D230D2ED900D95FAA /* RNZendeskChat */,
 				B6462EC01C603E340010294B /* Products */,
 			);
@@ -152,6 +154,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = RNZendeskChat;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -188,6 +191,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = RNZendeskChat;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

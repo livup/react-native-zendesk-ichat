@@ -12,12 +12,9 @@ import ChatSDK
 import ChatProvidersSDK
 import MessagingSDK
 
-
-@objc(RNZendeskChat)
-class RNZendeskChat: NSObject {
+@objc class RNZendeskChat: NSObject<RCTBridgeModule> {
     
-    @objc(options:)
-    func setVisitorInfo(options: NSDictionary) -> {
+    @objc func setVisitorInfo(options: NSDictionary) -> {
         let chatAPIConfiguration = ChatAPIConfiguration();
         if options["department"] {
             chatAPIConfiguration.department = options["department"];
@@ -32,8 +29,7 @@ class RNZendeskChat: NSObject {
         Chat.instance?.configuration = chatAPIConfiguration;
     }
     
-    @objc(options:)
-    func startChat(options: NSDictionary) -> {
+    @objc func startChat(options: NSDictionary) -> {
         
         let messagingConfiguration = MessagingConfiguration()
         messagingConfiguration.name = "Chat"
@@ -49,8 +45,7 @@ class RNZendeskChat: NSObject {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
-    @objc(zenDeskKey:)
-    func init(zenDeskKey: NSString) -> {
+    @objc func init(zenDeskKey: NSString) -> {
         Chat.initialize(accountKey: zenDeskKey)
     }
 }
