@@ -13,12 +13,15 @@ import ChatProvidersSDK
 import MessagingSDK
 
 @objc(RNZendeskChat)
-class RNZendeskChat: NSObject {
+class RNZendeskChat: RCTViewManager {
+    override static func requiresMainQueueSetup() -> Bool {
+        return true
+    }
     
     @objc func setVisitorInfo(_ options: NSDictionary) -> Void {
         let chatAPIConfiguration = ChatAPIConfiguration();
         if options["department"] != nil {
-            chatAPIConfiguration.department = options["department"] as! String;
+            chatAPIConfiguration.department = options["department"] as? String;
         }
         
         chatAPIConfiguration.visitorInfo = VisitorInfo(
@@ -34,7 +37,7 @@ class RNZendeskChat: NSObject {
     }
     
     @objc func startChat(_ options: NSDictionary) -> Void {
-        do {
+        DispatchQueue.main.async {
             let messagingConfiguration = MessagingConfiguration()
             messagingConfiguration.name = "Chat"
 
@@ -42,13 +45,10 @@ class RNZendeskChat: NSObject {
             chatConfiguration.isPreChatFormEnabled = true
 
             // Build view controller
-            let chatEngine = try ChatEngine.engine()
-            let viewController = try Messaging.instance.buildUI(engines: [chatEngine], configs: [messagingConfiguration, chatConfiguration])
-
-            RCTPresentedViewController()?.navigationController?.pushViewController(viewController, animated: true)
+            let chatEngine = try! ChatEngine.engine()
+            let chatViewController = try! Messaging.instance.buildUI(engines: [chatEngine], configs: [messagingConfiguration, chatConfiguration])
             
-        } catch {
-            
+            RCTPresentedViewController()?.navigationController?.pushViewController(chatViewController, animated: true)
         }
     }
     

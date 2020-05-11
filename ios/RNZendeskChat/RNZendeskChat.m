@@ -7,6 +7,3 @@
   RCT_EXTERN_METHOD(init: (NSDictionary *)zenDeskKey )
 
 @end
-
- @implementation RNZendeskChat: NSObject
- @end
