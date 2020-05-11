@@ -48,7 +48,7 @@ class RNZendeskChat: RCTViewManager {
             let chatEngine = try! ChatEngine.engine()
             let chatViewController = try! Messaging.instance.buildUI(engines: [chatEngine], configs: [messagingConfiguration, chatConfiguration])
             
-            RCTPresentedViewController()?.navigationController?.pushViewController(chatViewController, animated: true)
+            RCTPresentedViewController()?.show(chatViewController, sender: Any?.self)
         }
     }
     
