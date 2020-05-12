@@ -11,6 +11,7 @@ import Foundation
 import ChatSDK
 import ChatProvidersSDK
 import MessagingSDK
+import MessagingAPI
 
 @objc(RNZendeskChat)
 class RNZendeskChat: RCTViewManager {
@@ -18,9 +19,12 @@ class RNZendeskChat: RCTViewManager {
         return true
     }
     
+    var accountKey: String = "4dJHyAkYBAqJqjJusiThkeCnPH6tMmda"
+    
     @objc func setVisitorInfo(_ options: NSDictionary) -> Void {
         let chatAPIConfiguration = ChatAPIConfiguration();
-        if options["department"] != nil {
+        
+        if (options["department"] as? String) != nil {
             chatAPIConfiguration.department = options["department"] as? String;
         }
         
@@ -30,7 +34,11 @@ class RNZendeskChat: RCTViewManager {
             phoneNumber: options["phone"] as! String);
         
         if (options["tags"] != nil) {
-            chatAPIConfiguration.tags = options["tags"] as! [String];
+            chatAPIConfiguration.tags = (options["tags"] as? [String])!;
+        }
+        
+        if(Chat.instance == nil) {
+            print("No chat instance")
         }
         
         Chat.instance?.configuration = chatAPIConfiguration;
@@ -38,21 +46,27 @@ class RNZendeskChat: RCTViewManager {
     
     @objc func startChat(_ options: NSDictionary) -> Void {
         DispatchQueue.main.async {
-            let messagingConfiguration = MessagingConfiguration()
-            messagingConfiguration.name = "Chat"
-
-            let chatConfiguration = ChatConfiguration()
-            chatConfiguration.isPreChatFormEnabled = true
-
-            // Build view controller
+            Chat.initialize(accountKey: self.accountKey)
             let chatEngine = try! ChatEngine.engine()
-            let chatViewController = try! Messaging.instance.buildUI(engines: [chatEngine], configs: [messagingConfiguration, chatConfiguration])
+            let chatConfiguration = ChatConfiguration()
+            self.setVisitorInfo(options)
+
+            let formConfiguration = ChatFormConfiguration(
+                name: .required,
+                email: (options["emailNotRequired"] != nil) ? .optional : .required,
+                phoneNumber: (options["phoneNotRequired"] != nil) ? .optional : .required,
+                department: (options["departmentNotRequired"] != nil) ? .optional : .required
+            )
+
+            chatConfiguration.preChatFormConfiguration = formConfiguration
             
+            let chatViewController = try! Messaging.instance.buildUI(engines: [chatEngine], configs: [chatConfiguration])
+
             RCTPresentedViewController()?.show(chatViewController, sender: Any?.self)
         }
     }
     
-    @objc func `init`(_ zenDeskKey: String) -> Void {
-        Chat.initialize(accountKey: zenDeskKey)
+    @objc func setup(_ zenDeskKey: String) -> Void {
+        self.accountKey = zenDeskKey
     }
 }
