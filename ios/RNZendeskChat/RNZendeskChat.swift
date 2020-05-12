@@ -25,7 +25,7 @@ class RNZendeskChat: RCTViewManager {
         let chatAPIConfiguration = ChatAPIConfiguration();
         
         if (options["department"] as? String) != nil {
-            chatAPIConfiguration.department = options["department"] as? String;
+            chatAPIConfiguration.department = (options["department"] as! String);
         }
         
         chatAPIConfiguration.visitorInfo = VisitorInfo(
@@ -47,9 +47,10 @@ class RNZendeskChat: RCTViewManager {
     @objc func startChat(_ options: NSDictionary) -> Void {
         DispatchQueue.main.async {
             Chat.initialize(accountKey: self.accountKey)
+            self.setVisitorInfo(options)
+
             let chatEngine = try! ChatEngine.engine()
             let chatConfiguration = ChatConfiguration()
-            self.setVisitorInfo(options)
 
             let formConfiguration = ChatFormConfiguration(
                 name: .required,
@@ -59,6 +60,9 @@ class RNZendeskChat: RCTViewManager {
             )
 
             chatConfiguration.preChatFormConfiguration = formConfiguration
+            chatConfiguration.chatMenuActions = [
+                ChatMenuAction.endChat
+            ]
             
             let chatViewController = try! Messaging.instance.buildUI(engines: [chatEngine], configs: [chatConfiguration])
 
