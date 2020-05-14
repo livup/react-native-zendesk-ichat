@@ -19,13 +19,11 @@ class RNZendeskChat: RCTViewManager {
     }
     
     var accountKey: String = "4dJHyAkYBAqJqjJusiThkeCnPH6tMmda"
-    
+
     @objc func setVisitorInfo(_ options: NSDictionary) -> ChatAPIConfiguration {
         let chatAPIConfiguration = ChatAPIConfiguration();
-        
         if (options["department"] as? String) != nil {
-            chatAPIConfiguration.department = "Mercado"
-//            chatAPIConfiguration.department = (options["department"] as! String);
+            chatAPIConfiguration.department = options["department"] as! String
         }
         
         chatAPIConfiguration.visitorInfo = VisitorInfo(
@@ -41,15 +39,15 @@ class RNZendeskChat: RCTViewManager {
             print("No chat instance")
         }
         
-        return chatAPIConfiguration;
+        return chatAPIConfiguration
     }
     
     @objc func startChat(_ options: NSDictionary) -> Void {
         DispatchQueue.main.async {
-            Chat.initialize(accountKey: self.accountKey)
+            Chat.initialize(accountKey: self.accountKey, queue: .main)
+            Chat.instance?.configuration = self.setVisitorInfo(options)
 
             let chatEngine = try! ChatEngine.engine()
-            Chat.instance?.configuration = self.setVisitorInfo(options)
             let chatConfiguration = ChatConfiguration()
 
             let formConfiguration = ChatFormConfiguration(
@@ -63,6 +61,7 @@ class RNZendeskChat: RCTViewManager {
             chatConfiguration.chatMenuActions = [
                 ChatMenuAction.endChat
             ]
+            chatConfiguration.isPreChatFormEnabled = false
             
             let chatViewController = try! Messaging.instance.buildUI(engines: [chatEngine], configs: [chatConfiguration])
 
