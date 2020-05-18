@@ -18,18 +18,22 @@ class RNZendeskChat: RCTViewManager {
         return true
     }
     
-    var accountKey: String = "4dJHyAkYBAqJqjJusiThkeCnPH6tMmda"
-
+//    var accountKey: String = "4dJHyAkYBAqJqjJusiThkeCnPH6tMmda"
+ 
     @objc func setVisitorInfo(_ options: NSDictionary) -> ChatAPIConfiguration {
         let chatAPIConfiguration = ChatAPIConfiguration();
         if (options["department"] as? String) != nil {
-            chatAPIConfiguration.department = options["department"] as! String
+            chatAPIConfiguration.department = (options["department"] as! String)
         }
         
-        chatAPIConfiguration.visitorInfo = VisitorInfo(
+        
+        let visitorInfo = VisitorInfo(
             name: options["name"] as! String,
             email: options["email"] as! String,
-            phoneNumber: options["phone"] as! String);
+            phoneNumber: options["phone"] as! String
+        );
+        
+        chatAPIConfiguration.visitorInfo = visitorInfo
         
         if (options["tags"] != nil) {
             chatAPIConfiguration.tags = (options["tags"] as? [String])!;
@@ -44,7 +48,7 @@ class RNZendeskChat: RCTViewManager {
     
     @objc func startChat(_ options: NSDictionary) -> Void {
         DispatchQueue.main.async {
-            Chat.initialize(accountKey: self.accountKey, queue: .main)
+//            Chat.initialize(accountKey: self.accountKey, queue: .main)
             Chat.instance?.configuration = self.setVisitorInfo(options)
 
             let chatEngine = try! ChatEngine.engine()
@@ -62,6 +66,25 @@ class RNZendeskChat: RCTViewManager {
                 ChatMenuAction.endChat
             ]
             chatConfiguration.isPreChatFormEnabled = false
+            chatConfiguration.isAgentAvailabilityEnabled = true
+            
+            let token = Chat.chatProvider?.observeChatState { (chatState) in
+             // Handle chatState updates
+                switch chatState.chatSessionStatus {
+                case .initializing:
+                    print("Zendesk: chat state changed to => initializing \(chatState.chatSessionStatus)")
+                case .configuring:
+                    print("Zendesk: chat state changed to => configuring \(chatState.chatSessionStatus)")
+                case .started:
+                    print("Zendesk: chat state changed to => started \(chatState.chatSessionStatus)")
+                case .ending:
+                    print("Zendesk: chat state changed to => ending \(chatState.chatSessionStatus)")
+                case .ended:
+                    print("Zendesk: chat state changed to => ended \(chatState.chatSessionStatus)")
+                default:
+                    print("Zendesk: chat state changed to => anything else \(chatState.chatSessionStatus)")
+                }
+            }
             
             let chatViewController = try! Messaging.instance.buildUI(engines: [chatEngine], configs: [chatConfiguration])
 
@@ -70,6 +93,6 @@ class RNZendeskChat: RCTViewManager {
     }
     
     @objc func setup(_ zenDeskKey: String) -> Void {
-        self.accountKey = zenDeskKey
+//        self.accountKey = zenDeskKey
     }
 }
