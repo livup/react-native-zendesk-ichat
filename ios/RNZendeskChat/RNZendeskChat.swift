@@ -20,9 +20,10 @@ class RNZendeskChat: RCTViewManager {
  
     @objc func setVisitorInfo(_ options: NSDictionary) -> ChatAPIConfiguration {
         let chatAPIConfiguration = ChatAPIConfiguration();
-        if (options["department"] as? String) != nil {
-            chatAPIConfiguration.department = (options["department"] as! String)
-        }
+        // This should remain disabled until Zendesk SDK v2 is working
+        // if (options["department"] as? String) != nil {
+        //     chatAPIConfiguration.department = (options["department"] as! String)
+        // }
         
         
         let visitorInfo = VisitorInfo(
