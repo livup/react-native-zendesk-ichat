@@ -26,16 +26,16 @@ class RNZendeskChat: RCTViewManager {
         // }
         
         
-        let visitorInfo = VisitorInfo(
-            name: options["name"] as! String,
-            email: options["email"] as! String,
-            phoneNumber: options["phone"] as! String
-        );
+        if let name = options["name"] as? String, let email = options["email"] as? String, let phone = options["phone"] as? String {
+            chatAPIConfiguration.visitorInfo = VisitorInfo(
+                name: name,
+                email: email,
+                phoneNumber: phone
+            )
+        }                
         
-        chatAPIConfiguration.visitorInfo = visitorInfo
-        
-        if (options["tags"] != nil) {
-            chatAPIConfiguration.tags = (options["tags"] as? [String])!;
+        if let tags = options["tags"] as? [String] {
+            chatAPIConfiguration.tags = tags;
         }
         
         if(Chat.instance == nil) {
