@@ -65,7 +65,7 @@ class RNZendeskChat: RCTViewManager {
             ]
             chatConfiguration.isPreChatFormEnabled = true
             
-            let chatViewController = try! Messaging.instance.buildUI(engines: [chatEngine], configs: [chatConfiguration])
+            guard let chatViewController = try? Messaging.instance.buildUI(engines: [chatEngine], configs: [chatConfiguration]) else { return }
 
             RCTPresentedViewController()?.show(chatViewController, sender: Any?.self)
         }
