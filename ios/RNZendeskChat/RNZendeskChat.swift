@@ -49,7 +49,7 @@ class RNZendeskChat: RCTViewManager {
         DispatchQueue.main.async {
             Chat.instance?.configuration = self.setVisitorInfo(options)
 
-            let chatEngine = try! ChatEngine.engine()
+            guard let chatEngine = try? ChatEngine.engine() else { return }
             let chatConfiguration = ChatConfiguration()
 
             let formConfiguration = ChatFormConfiguration(
