@@ -22,6 +22,6 @@ Pod::Spec.new do |s|
   s.swift_version = '5.0'
 
   s.dependency 'React'
-  s.dependency 'ZendeskChatSDK', '~> 2.6.0'
+  s.dependency 'ZendeskChatSDK', '~> 2.7'
   s.static_framework = true
 end
